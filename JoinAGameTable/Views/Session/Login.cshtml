@@ -1,9 +1,11 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer ViewLocalizer
 @model JoinAGameTable.ViewModels.AuthenticationViewModel
+
 @{
     ViewData["Title"] = ViewLocalizer.GetString("session.login.title");
 }
+
 <h1>@ViewData["Title"]</h1>
 
 <form asp-action="POST_AuthenticateUser" method="post">

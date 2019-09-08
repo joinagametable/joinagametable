@@ -1,47 +1,47 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
 @model JoinAGameTable.ViewModels.Event.CreateNewEventViewModel
 
 @{
-    ViewBag.Title = "Proposer un évènement";
+    ViewBag.Title = @ViewLocalizer.GetString("event.create.create-event");
     Layout = "_Layout";
     ViewData["CurrentMenuActive"] = "create";
 }
 
-<h1>Proposer un évènement</h1>
+<h1>@ViewLocalizer.GetString("event.create.create-event")</h1>
 <p>
-    Vous avez un évènement ? Nous vous accompagnons tout au long du processus de création. Répondez simplement
-    aux questions ci-dessous, vous pourrez tout éditer par la suite. Votre évènement ne sera pas mis en ligne
-    tant que vous ne l'aurez pas décidé.
+    @ViewLocalizer.GetString("event.create.text-description")
 </p>
 <br/>
 <br/>
 <form asp-action="POST_CreateNewEvent" method="post">
     <div asp-validation-summary="ModelOnly" class="fg-red"> </div>
     <div class="form-group">
-        <label asp-for="Name">Quel est le nom de votre évènement ?</label>
+        <label asp-for="Name">@ViewLocalizer.GetString("event.create-or-update.which-name")</label>
         <input type="text" data-role="input" asp-for="Name" maxlength="50">
         <span asp-validation-for="Name" class="fg-red"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Description">Décrivez votre évènement</label>
+        <label asp-for="Description">@ViewLocalizer.GetString("event.create-or-update.describe-event")</label>
         <textarea asp-for="Description"></textarea>
         <span asp-validation-for="Description" class="fg-red"></span>
     </div>
     <div class="form-group">
-        <label asp-for="BeginsAtDate">Quand commence t'il ?</label>
+        <label asp-for="BeginsAtDate">@ViewLocalizer.GetString("event.create-or-update.begins-at")</label>
         <input type="text" data-role="datepicker" data-distance="2" data-format="%Y-%m-%d" asp-for="BeginsAtDate">
         <input type="text" data-role="timepicker" data-distance="2" data-seconds="false" asp-for="BeginsAtTime">
         <span asp-validation-for="BeginsAtDate" class="fg-red"></span>
         <span asp-validation-for="BeginsAtTime" class="fg-red"></span>
     </div>
     <div class="form-group">
-        <label asp-for="EndsAtDate">Quand se termine t'il ?</label>
+        <label asp-for="EndsAtDate">@ViewLocalizer.GetString("event.create-or-update.ends-at")</label>
         <input type="text" data-role="datepicker" data-distance="2" data-format="%Y-%m-%d" asp-for="EndsAtDate">
         <input type="text" data-role="timepicker" data-distance="2" data-seconds="false" asp-for="EndsAtTime">
         <span asp-validation-for="EndsAtDate" class="fg-red"></span>
         <span asp-validation-for="EndsAtTime" class="fg-red"></span>
     </div>
     <div class="form-group">
-        <button class="button success">Continuer</button>
+        <button class="button success">@ViewLocalizer.GetString("event.create-or-update.button-create")</button>
     </div>
     <br/>
 </form>

@@ -1,9 +1,11 @@
-@inject IViewLocalizer ViewLocalizer
 @using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
 @model JoinAGameTable.ViewModels.SignUpViewModel
+
 @{
     ViewData["Title"] = ViewLocalizer.GetString("session.signup.title");
 }
+
 <h1>@ViewData["Title"]</h1>
 
 <form asp-action="POST_SignUp" method="post">

@@ -1,3 +1,5 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
 @model JoinAGameTable.ViewModels.Event.ShowEventGameTablesViewModel
 
 @{
@@ -12,16 +14,16 @@
 <div class="clear-float">
     <div class="place-right">
         <a asp-area="" asp-controller="Event" asp-action="GET_CreateNewGameTable" asp-route-eventId="@Model.EventId" class="button primary">
-            Ajouter une table
+            @ViewLocalizer.GetString("event.manage.gametables.button-create")
         </a>
     </div>
 </div>
 <table class="table">
     <thead>
     <tr>
-        <th>Nom</th>
-        <th>Type</th>
-        <th>Places</th>
+        <th>@ViewLocalizer.GetString("event.manage.gametables.name")</th>
+        <th>@ViewLocalizer.GetString("event.manage.gametables.type")</th>
+        <th>@ViewLocalizer.GetString("event.manage.gametables.seats")</th>
     </tr>
     </thead>
     <tbody>

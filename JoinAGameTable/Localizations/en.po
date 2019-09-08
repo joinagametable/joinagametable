@@ -76,6 +76,9 @@ msgstr "Password"
 msgid "session.signup.signup"
 msgstr "Sign up"
 
+msgid "session.signup.flash-success"
+msgstr "User account created with success."
+
 msgid "user-account.profile.title"
 msgstr "My profile"
 
@@ -101,7 +104,17 @@ msgid "user-account.profile.update-button"
 msgstr "Update"
 
 msgid "user-account.profile.flash-success"
-msgstr "Profile updated with success"
+msgstr "Profile updated with success."
+
+msgid "event.list-my-event.my-events"
+msgstr "My events"
+
+msgid "event.list-my-event.text-description"
+msgstr "Here you will find all the events you have created on the platform. You can click on "
+"the name of the one you want to configure or get more information."
+
+msgid "event.list-my-event.button-create"
+msgstr "Create an event"
 
 msgid "event.list-my-event.name"
 msgstr "Name"
@@ -121,11 +134,114 @@ msgstr "Yes"
 msgid "event.list-my-event.public-no"
 msgstr "No"
 
+msgid "event.manage.submenu.insights"
+msgstr "Insights"
+
+msgid "event.manage.submenu.information"
+msgstr "Information"
+
+msgid "event.manage.submenu.game-tables"
+msgstr "Game Tables"
+
+msgid "event.manage.submenu.faq"
+msgstr "FAQ"
+
+msgid "event.manage.gametables.button-create"
+msgstr "Create a new game table"
+
+msgid "event.manage.gametables.name"
+msgstr "Name"
+
+msgid "event.manage.gametables.type"
+msgstr "Type"
+
+msgid "event.manage.gametables.seats"
+msgstr "Seats"
+
+msgid "event.manage.gametables.create.which-type"
+msgstr "What type of game is played on this table?"
+
 msgid "event.create.flash-success"
-msgstr "Event created with success"
+msgstr "Event created with success."
 
 msgid "event.update.flash-success"
-msgstr "Event information updated with success"
+msgstr "Event information updated with success."
+
+msgid "home.upcoming-events"
+msgstr "Upcoming events"
+
+msgid "explore.explore"
+msgstr "Explore"
+
+msgid "explore.explore-all-events"
+msgstr "Explore all events"
+
+msgid "explore.event.about"
+msgstr "About"
+
+msgid "event.create.create-event"
+msgstr "Create an event"
+
+msgid "event.create.text-description"
+msgstr "Do you have an event? Simply answer the questions below, you will be able to edit everything later. "
+"Your event will not be posted until you have decided."
+
+msgid "event.create-or-update.which-name"
+msgstr "What is the name of your event?"
+
+msgid "event.create-or-update.describe-event"
+msgstr "Describe your event"
+
+msgid "event.create-or-update.begins-at"
+msgstr "When does it start?"
+
+msgid "event.create-or-update.ends-at"
+msgstr "When does it end?"
+
+msgid "event.create-or-update.is-public"
+msgstr "Is the event publicly available?"
+
+msgid "event.create-or-update.public-at"
+msgstr "When does it publicly available?"
+
+msgid "event.create-or-update.banner"
+msgstr "Banner"
+
+msgid "event.create-or-update.cover"
+msgstr "Cover"
+
+msgid "event.create-or-update.button-create"
+msgstr "Create"
+
+msgid "event.create-or-update.button-update"
+msgstr "Update"
+
+msgid "mainmenu.home"
+msgstr "Home"
+
+msgid "mainmenu.explore"
+msgstr "Explore"
+
+msgid "mainmenu.create-event"
+msgstr "Create an event"
+
+msgid "mainmenu.sub-menu-my-account"
+msgstr "My account"
+
+msgid "mainmenu.my-bookings"
+msgstr "My bookings"
+
+msgid "mainmenu.my-events"
+msgstr "My events"
+
+msgid "mainmenu.settings"
+msgstr "Settings"
+
+msgid "mainmenu.logout"
+msgstr "Logout"
+
+msgid "mainmenu.login"
+msgstr "Login"
 
 msgid "enum.ROLE_PLAYING_GAME"
 msgstr "Role Playing Game"

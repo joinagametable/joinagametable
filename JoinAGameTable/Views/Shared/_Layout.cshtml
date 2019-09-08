@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer ViewLocalizer
+
 <!DOCTYPE html>
 <html lang="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName">
 <head>
@@ -10,7 +11,7 @@
     <meta name="theme-color" content="#1d1d1d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="metro4:locale" content="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName-@CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpper()">
+    <meta name="metro4:locale" content="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName-@CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpper().Replace("EN", "US")">
     <title>@ViewData["Title"] - JoinAGameTable</title>
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/metro/css/metro-all.css"/>
@@ -79,17 +80,17 @@
         <ul class="app-bar-menu">
             <li>
                 <a asp-area="" asp-controller="Home" asp-action="Index">
-                    Accueil
+                    @ViewLocalizer.GetString("mainmenu.home")
                 </a>
             </li>
             <li>
                 <a asp-area="" asp-controller="Explorer" asp-action="GET_Explorer">
-                    Explorer
+                    @ViewLocalizer.GetString("mainmenu.explore")
                 </a>
             </li>
             <li>
                 <a asp-area="" asp-controller="Event" asp-action="GET_CreateNewEvent">
-                    Proposer un évènement
+                    @ViewLocalizer.GetString("mainmenu.create-event")
                 </a>
             </li>
             <li class="item-separator"></li>
@@ -99,18 +100,18 @@
             {
                 <li>
                     <a href="#">
-                        Mes réservations
+                        @ViewLocalizer.GetString("mainmenu.my-bookings")
                     </a>
                 </li>
 
                 <li>
                     <a asp-area="" asp-controller="Event" asp-action="GET_ListMyEvents">
-                        Mes évènements
+                        @ViewLocalizer.GetString("mainmenu.my-events")
                     </a>
                 </li>
                 <li>
                     <a asp-area="" asp-controller="UserAccount" asp-action="GET_ShowUserProfile">
-                        Paramètres
+                        @ViewLocalizer.GetString("mainmenu.settings")
                     </a>
                 </li>
 
@@ -119,7 +120,7 @@
                 <li class="item-separator"></li>
                 <li>
                     <a asp-area="" asp-controller="Session" asp-action="GET_CloseSession">
-                        Déconnexion
+                        @ViewLocalizer.GetString("mainmenu.logout")
                     </a>
                 </li>
             }
@@ -127,7 +128,7 @@
             {
                 <li>
                     <a asp-area="" asp-controller="Session" asp-action="GET_ShowAuthenticationForm">
-                        Connexion
+                        @ViewLocalizer.GetString("mainmenu.login")
                     </a>
                 </li>
             }
@@ -147,42 +148,42 @@
             <li class="@((string) ViewData["CurrentMenuActive"] == "home" ? "active" : "")">
                 <a asp-area="" asp-controller="Home" asp-action="Index">
                     <span class="icon"><span class="mif-home"></span></span>
-                    <span class="caption">Accueil</span>
+                    <span class="caption">@ViewLocalizer.GetString("mainmenu.home")</span>
                 </a>
             </li>
             <li class="@((string) ViewData["CurrentMenuActive"] == "explorer" ? "active" : "")">
                 <a asp-area="" asp-controller="Explorer" asp-action="GET_Explorer">
                     <span class="icon"><span class="mif-bookmarks"></span></span>
-                    <span class="caption">Explorer</span>
+                    <span class="caption">@ViewLocalizer.GetString("mainmenu.explore")</span>
                 </a>
             </li>
             <li class="@((string) ViewData["CurrentMenuActive"] == "create" ? "active" : "")">
                 <a asp-area="" asp-controller="Event" asp-action="GET_CreateNewEvent">
                     <span class="icon"><span class="mif-plus"></span></span>
-                    <span class="caption">Proposer un évènement</span>
+                    <span class="caption">@ViewLocalizer.GetString("mainmenu.create-event")</span>
                 </a>
             </li>
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="item-separator"></li>
                 <li class="item-separator"></li>
-                <li class="item-header">Mon compte</li>
+                <li class="item-header">@ViewLocalizer.GetString("mainmenu.sub-menu-my-account")</li>
                 <li class="@((string) ViewData["CurrentMenuActive"] == "booking" ? "active" : "")">
                     <a href="#">
                         <span class="icon"><span class="mif-calendar"></span></span>
-                        <span class="caption">Mes réservations</span>
+                        <span class="caption">@ViewLocalizer.GetString("mainmenu.my-bookings")</span>
                     </a>
                 </li>
                 <li class="@((string) ViewData["CurrentMenuActive"] == "events" ? "active" : "")">
                     <a asp-area="" asp-controller="Event" asp-action="GET_ListMyEvents">
                         <span class="icon"><span class="mif-star-full"></span></span>
-                        <span class="caption">Mes &eacute;v&egrave;nements</span>
+                        <span class="caption">@ViewLocalizer.GetString("mainmenu.my-events")</span>
                     </a>
                 </li>
                 <li class="@((string) ViewData["CurrentMenuActive"] == "settings" ? "active" : "")">
                     <a asp-area="" asp-controller="UserAccount" asp-action="GET_ShowUserProfile">
                         <span class="icon"><span class="mif-equalizer"></span></span>
-                        <span class="caption">Paramètres</span>
+                        <span class="caption">@ViewLocalizer.GetString("mainmenu.settings")</span>
                     </a>
                 </li>
                 @*
@@ -203,7 +204,7 @@
                 <li style="position:fixed; bottom:0; width:100%">
                     <a asp-area="" asp-controller="Session" asp-action="GET_CloseSession">
                         <span class="icon"><span class="mif-exit"></span></span>
-                        <span class="caption">Déconnexion</span>
+                        <span class="caption">@ViewLocalizer.GetString("mainmenu.logout")</span>
                     </a>
                 </li>
             }
@@ -212,7 +213,7 @@
                 <li style="position:fixed; bottom:0; width:100%">
                     <a asp-area="" asp-controller="Session" asp-action="GET_ShowAuthenticationForm">
                         <span class="icon"><span class="mif-exit"></span></span>
-                        <span class="caption">Connexion</span>
+                        <span class="caption">@ViewLocalizer.GetString("mainmenu.login")</span>
                     </a>
                 </li>
             }

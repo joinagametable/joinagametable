@@ -1,22 +1,25 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+
 <ul class="app-bar-present pos-relative" data-role="tabs" data-expand="true">
     <li class="@((string) ViewData["CurrentSubMenuActive"] == "insights" ? "active" : "")">
         <a asp-area="" asp-controller="Event" asp-action="GET_ShowEventDashboard" asp-route-eventId="@Model.EventId">
-            Insights
+            @ViewLocalizer.GetString("event.manage.submenu.insights")
         </a>
     </li>
     <li class="@((string) ViewData["CurrentSubMenuActive"] == "information" ? "active" : "")">
         <a asp-area="" asp-controller="Event" asp-action="GET_ShowEventInformation" asp-route-eventId="@Model.EventId">
-            Informations
+            @ViewLocalizer.GetString("event.manage.submenu.information")
         </a>
     </li>
     <li class="@((string) ViewData["CurrentSubMenuActive"] == "gametables" ? "active" : "")">
         <a asp-area="" asp-controller="Event" asp-action="GET_ShowEventGameTables" asp-route-eventId="@Model.EventId">
-            Tables de Jeux
+            @ViewLocalizer.GetString("event.manage.submenu.game-tables")
         </a>
     </li>
     <li class="@((string) ViewData["CurrentSubMenuActive"] == "faq" ? "active" : "")">
         <a asp-area="" asp-controller="Event" asp-action="GET_ShowEventFAQ" asp-route-eventId="@Model.EventId">
-            FAQ
+            @ViewLocalizer.GetString("event.manage.submenu.faq")
         </a>
     </li>
 </ul>
