@@ -1,0 +1,19 @@
+@model JoinAGameTable.ViewModels.Explorer.ShowEventViewModel
+
+@{
+    ViewBag.Title = @Model.Name;
+    Layout = "_Layout";
+    ViewData["CurrentMenuActive"] = "explorer";
+    ViewData["BackgroundTopImage"] = @Model.BannerUrl;
+}
+
+<h1>@Model.Name</h1>
+
+<ul class="app-bar-present pos-relative" data-role="materialtabs" id="event-submenu">
+    <li class="active"><a href="#introduction">Présentation</a></li>
+</ul>
+<div class="mt-2 pt-3">
+    <div id="introduction">
+        @Html.Raw(Model.Description)
+    </div>
+</div>

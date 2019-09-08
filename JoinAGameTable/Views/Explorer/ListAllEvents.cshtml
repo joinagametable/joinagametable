@@ -1,0 +1,31 @@
+@model JoinAGameTable.ViewModels.Explorer.ExplorerViewModel
+
+@{
+    ViewBag.Title = "Explorer";
+    Layout = "_Layout";
+    ViewData["CurrentMenuActive"] = "explorer";
+}
+
+<h1>Explorez les évènements</h1>
+
+<div class="d-flex flex-content-start flex-wrap flex-justify-start-md flex-justify-center-fs">
+    @foreach (var evt in Model.Events)
+    {
+        <a class="no-decor mr-5-md mr-2-fs ml-0-md ml-2-fs" style="color: inherit;" asp-area="" asp-controller="Explorer" asp-action="GET_ShowEvent" asp-route-eventId="@evt.Id">
+
+            <div class="card" style="width:300px;">
+                <div class="card-header">
+                    <div style="font-weight: 500;">@evt.Name</div>
+                    <div style="font-size: 0.8125rem;
+                        font-weight: 500;
+                        color: #aaaaaa;">@evt.Owner</div>
+                </div>
+                <div class="card-content" style="height:180px;background-size: cover;background-image: url('@evt.CoverUrl')">
+                </div>
+               @* <div class="card-footer">
+                    <div><span class="mif-calendar"></span> Du 2019-07-01 18:00 au 2019-07-02 20:00</div>
+                </div>*@
+            </div>
+        </a>
+    }
+</div>

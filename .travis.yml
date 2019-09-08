@@ -1,0 +1,19 @@
+language:
+  csharp
+
+dist:
+  xenial 
+
+mono:
+  none
+
+dotnet: 
+  2.2
+
+solution:
+  WebApplication1.sln
+
+script:
+  - dotnet restore
+  - dotnet build
+  - dotnet test

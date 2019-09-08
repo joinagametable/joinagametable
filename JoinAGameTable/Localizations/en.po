@@ -1,0 +1,137 @@
+msgid "error.required"
+msgstr "This field is required."
+
+msgid "error.invalid"
+msgstr "This value is not valid."
+
+msgid "error.length"
+msgstr "The field must be a string with a minimum length of {2} and a maximum length of {1}."
+
+msgid "error.min-length"
+msgstr "The field must be a string with a minimum length of {1}."
+
+msgid "error.email"
+msgstr "The field is not a valid e-mail address."
+
+msgid "error.email-not-available"
+msgstr "This email address is already in use."
+
+msgid "error.date-must-be-before"
+msgstr "Date must be before {0}."
+
+msgid "error.date-must-be-after"
+msgstr "Date must be after {0}."
+
+msgid "error.date-must-be-in-future"
+msgstr "Date must be in the future."
+
+msgid "topbar.menu.search-tooltip"
+msgstr "Search"
+
+msgid "topbar.menu.search-button"
+msgstr "Search"
+
+msgid "topbar.menu.authentication"
+msgstr "Authentication"
+
+msgid "topbar.menu.my-profile"
+msgstr "My profile"
+
+msgid "topbar.menu.site-admin"
+msgstr "Site administration"
+
+msgid "topbar.menu.logout"
+msgstr "Logout"
+
+msgid "session.login.title"
+msgstr "Authentication"
+
+msgid "session.login.email"
+msgstr "Email"
+
+msgid "session.login.password"
+msgstr "Password"
+
+msgid "session.login.login"
+msgstr "Log me in"
+
+msgid "session.login.signup"
+msgstr "Sign up!"
+
+msgid "session.signup.title"
+msgstr "Sign up!"
+
+msgid "session.signup.first-name"
+msgstr "First name"
+
+msgid "session.signup.last-name"
+msgstr "Last name"
+
+msgid "session.signup.email"
+msgstr "Email"
+
+msgid "session.signup.password"
+msgstr "Password"
+
+msgid "session.signup.signup"
+msgstr "Sign up"
+
+msgid "user-account.profile.title"
+msgstr "My profile"
+
+msgid "user-account.profile.first-name"
+msgstr "First name"
+
+msgid "user-account.profile.last-name"
+msgstr "Last name"
+
+msgid "user-account.profile.display-name"
+msgstr "Display name"
+
+msgid "user-account.profile.help-display-name"
+msgstr "Your display name will appear on the site. If you don’t want your full name to appear, please use your nickname."
+
+msgid "user-account.profile.email"
+msgstr "Email"
+
+msgid "user-account.profile.language"
+msgstr "Language"
+
+msgid "user-account.profile.update-button"
+msgstr "Update"
+
+msgid "user-account.profile.flash-success"
+msgstr "Profile updated with success"
+
+msgid "event.list-my-event.name"
+msgstr "Name"
+
+msgid "event.list-my-event.is-public"
+msgstr "Public ?"
+
+msgid "event.list-my-event.begins-at"
+msgstr "Begins at"
+
+msgid "event.list-my-event.ends-at"
+msgstr "Ends at"
+
+msgid "event.list-my-event.public-yes"
+msgstr "Yes"
+
+msgid "event.list-my-event.public-no"
+msgstr "No"
+
+msgid "event.create.flash-success"
+msgstr "Event created with success"
+
+msgid "event.update.flash-success"
+msgstr "Event information updated with success"
+
+msgid "enum.ROLE_PLAYING_GAME"
+msgstr "Role Playing Game"
+
+msgid "enum.BOARD_GAME"
+msgstr "Board Game"
+
+msgid "enum.CARD_GAME"
+msgstr "Card Game"

@@ -1,0 +1,27 @@
+# IDEA
+.idea/
+*.iml
+
+
+# Visual Studio
+.vs
+
+
+# Compiled objects #
+obj
+bin
+*.exe
+
+
+# Project based files
+appsettings.Development.json
+
+
+# Generated files #
+gen-csharp
+
+
+# Others
+Thumbs.db
+desktop.ini
+.DS_Store

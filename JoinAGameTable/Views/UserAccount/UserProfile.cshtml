@@ -1,0 +1,54 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+@model JoinAGameTable.ViewModels.UserAccountProfileViewModel
+@{
+    ViewData["Title"] = ViewLocalizer.GetString("user-account.profile.title");
+    ViewData["CurrentMenuActive"] = "settings";
+}
+<h1>@ViewData["Title"]</h1>
+<br/>
+
+<form asp-action="POST_UpdateUserProfile" enctype="multipart/form-data" method="post" autocomplete="off">
+    <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+
+    @if (Model.AvatarUrl != null)
+    {
+        <img class="align-self-start mr-5 img-fluid rounded" style="max-width: 25%; height: auto;" alt="@User.GetDisplayName()" src="@Model.AvatarUrl"/>
+    }
+
+    <div class="form-group">
+        <label asp-for="Avatar" class="control-label">Avatar</label>
+        <input type="file" name="Avatar" data-role="file" data-prepend="Avatar">
+        <span asp-validation-for="Avatar" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FirstName" class="control-label">@ViewLocalizer.GetString("user-account.profile.first-name")</label>
+        <input class="form-control" asp-for="FirstName" class="form-control"/>
+        <span asp-validation-for="FirstName" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label">@ViewLocalizer.GetString("user-account.profile.last-name")</label>
+        <input class="form-control" asp-for="LastName" class="form-control"/>
+        <span asp-validation-for="LastName" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DisplayName" class="control-label">@ViewLocalizer.GetString("user-account.profile.display-name")</label>
+        <input class="form-control" asp-for="DisplayName" class="form-control"/>
+        <small id="DisplayName-Help" class="text-muted">@ViewLocalizer.GetString("user-account.profile.help-display-name")</small>
+        <span asp-validation-for="DisplayName" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label">@ViewLocalizer.GetString("user-account.profile.email")</label>
+        <input class="form-control" asp-for="Email" class="form-control"/>
+        <span asp-validation-for="Email" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Language" class="control-label">@ViewLocalizer.GetString("user-account.profile.language")</label>
+        <select class="form-control" asp-for="Language" asp-items="@Model.LanguageAvailables">
+        </select>
+        <span asp-validation-for="Language" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="@ViewLocalizer.GetString("user-account.profile.update-button")" class="btn btn-outline-primary"/>
+    </div>
+</form>

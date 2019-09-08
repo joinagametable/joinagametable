@@ -1,0 +1,37 @@
+@model JoinAGameTable.ViewModels.Event.ShowEventGameTablesViewModel
+
+@{
+    ViewBag.Title = Model.EventName;
+    Layout = "_Layout";
+    ViewData["CurrentMenuActive"] = "events";
+    ViewData["CurrentSubMenuActive"] = "gametables";
+}
+
+<h1>@Model.EventName</h1>
+<partial name="_SubMenu"></partial>
+<div class="clear-float">
+    <div class="place-right">
+        <a asp-area="" asp-controller="Event" asp-action="GET_CreateNewGameTable" asp-route-eventId="@Model.EventId" class="button primary">
+            Ajouter une table
+        </a>
+    </div>
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Type</th>
+        <th>Places</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var gameTable in Model.GameTables)
+    {
+        <tr>
+            <td><a href="" class="no-decor">@gameTable.Name</a></td>
+            <td>@gameTable.Type</td>
+            <td>@gameTable.CurrentSeat / @gameTable.NumberOfSeat</td>
+        </tr>
+    }
+    </tbody>
+</table>

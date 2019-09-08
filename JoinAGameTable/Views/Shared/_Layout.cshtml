@@ -1,0 +1,250 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="google" content="notranslate">
+    <meta name="theme-color" content="#1d1d1d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="metro4:locale" content="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName-@CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpper()">
+    <title>@ViewData["Title"] - JoinAGameTable</title>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/metro/css/metro-all.css"/>
+        <link rel="stylesheet" href="~/lib/simplemde/simplemde.min.css"/>
+        <link rel="stylesheet" href="~/lib/cropper/cropper.css"/>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"
+              asp-fallback-href="~/lib/metro/css/metro-all.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous" />
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.css"
+              integrity="sha256-Is0XNfNX8KF/70J2nv8Qe6BWyiXrtFxKfJBHoDgNAEM="
+              crossorigin="anonymous" />
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.0.0/cropper.min.css"
+              integrity="sha256-/KLAk4A9xEOKGyr4umt11boYQJtP40gBLT+WrfWImuY="
+              crossorigin="anonymous" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="icon" type="image/png" href="~/favicon.png"/>
+</head>
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/metro/js/metro.js"></script>
+    <script src="~/lib/momentjs/moment-with-locales.min.js"></script>
+    <script src="~/lib/simplemde/simplemde.min.js"></script>
+    <script src="~/lib/cropper/cropper.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+    </script>
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"
+            asp-fallback-src="~/lib/metro/js/metro.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+            integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.js"
+            integrity="sha256-6sZs7OGP0Uzcl7UDsLaNsy1K0KTZx1+6yEVrRJMn2IM="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.0.0/cropper.min.js"
+            integrity="sha256-QT8oUxSZbywEwAPBgej6iNFH1ephgQV3q2pzjIso5pk="
+            crossorigin="anonymous">
+    </script>
+</environment>
+<script type="text/javascript">
+    moment.locale('@CultureInfo.CurrentCulture.TwoLetterISOLanguageName');
+</script>
+<body>
+
+<div data-role="navview" data-expanded="md" data-compact="sm">
+    <div data-role="appbar" data-expand-point="md" class="d-none-sm bg-dark fg-white">
+        <a class="brand no-hover">
+        </a>
+
+        <ul class="app-bar-menu">
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    Accueil
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Explorer" asp-action="GET_Explorer">
+                    Explorer
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Event" asp-action="GET_CreateNewEvent">
+                    Proposer un évènement
+                </a>
+            </li>
+            <li class="item-separator"></li>
+            <li class="item-separator"></li>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li>
+                    <a href="#">
+                        Mes réservations
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-area="" asp-controller="Event" asp-action="GET_ListMyEvents">
+                        Mes évènements
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="UserAccount" asp-action="GET_ShowUserProfile">
+                        Paramètres
+                    </a>
+                </li>
+
+                <li class="item-separator"></li>
+                <li class="item-separator"></li>
+                <li class="item-separator"></li>
+                <li>
+                    <a asp-area="" asp-controller="Session" asp-action="GET_CloseSession">
+                        Déconnexion
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a asp-area="" asp-controller="Session" asp-action="GET_ShowAuthenticationForm">
+                        Connexion
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="navview-pane pos-fixed">
+        <button class="pull-button d-none-md">
+            <span class="default-icon-menu"></span>
+        </button>
+        <div class="suggest-box">
+            <input type="text" data-role="input" data-clear-button="false" data-search-button="true">
+            <button class="holder">
+                <span class="mif-search"></span>
+            </button>
+        </div>
+        <ul class="navview-menu" style="height: calc(100% - 68px);">
+            <li class="@((string) ViewData["CurrentMenuActive"] == "home" ? "active" : "")">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="icon"><span class="mif-home"></span></span>
+                    <span class="caption">Accueil</span>
+                </a>
+            </li>
+            <li class="@((string) ViewData["CurrentMenuActive"] == "explorer" ? "active" : "")">
+                <a asp-area="" asp-controller="Explorer" asp-action="GET_Explorer">
+                    <span class="icon"><span class="mif-bookmarks"></span></span>
+                    <span class="caption">Explorer</span>
+                </a>
+            </li>
+            <li class="@((string) ViewData["CurrentMenuActive"] == "create" ? "active" : "")">
+                <a asp-area="" asp-controller="Event" asp-action="GET_CreateNewEvent">
+                    <span class="icon"><span class="mif-plus"></span></span>
+                    <span class="caption">Proposer un évènement</span>
+                </a>
+            </li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="item-separator"></li>
+                <li class="item-separator"></li>
+                <li class="item-header">Mon compte</li>
+                <li class="@((string) ViewData["CurrentMenuActive"] == "booking" ? "active" : "")">
+                    <a href="#">
+                        <span class="icon"><span class="mif-calendar"></span></span>
+                        <span class="caption">Mes réservations</span>
+                    </a>
+                </li>
+                <li class="@((string) ViewData["CurrentMenuActive"] == "events" ? "active" : "")">
+                    <a asp-area="" asp-controller="Event" asp-action="GET_ListMyEvents">
+                        <span class="icon"><span class="mif-star-full"></span></span>
+                        <span class="caption">Mes &eacute;v&egrave;nements</span>
+                    </a>
+                </li>
+                <li class="@((string) ViewData["CurrentMenuActive"] == "settings" ? "active" : "")">
+                    <a asp-area="" asp-controller="UserAccount" asp-action="GET_ShowUserProfile">
+                        <span class="icon"><span class="mif-equalizer"></span></span>
+                        <span class="caption">Paramètres</span>
+                    </a>
+                </li>
+                @*
+                <li class="item-separator"></li>
+                <li class="item-separator"></li>
+                <li class="item-header">Favoris</li>
+                <li>
+                    <a href="">
+                        <span class="caption">Event 1</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="caption">Event 2</span>
+                    </a>
+                </li>
+                *@
+                <li style="position:fixed; bottom:0; width:100%">
+                    <a asp-area="" asp-controller="Session" asp-action="GET_CloseSession">
+                        <span class="icon"><span class="mif-exit"></span></span>
+                        <span class="caption">Déconnexion</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li style="position:fixed; bottom:0; width:100%">
+                    <a asp-area="" asp-controller="Session" asp-action="GET_ShowAuthenticationForm">
+                        <span class="icon"><span class="mif-exit"></span></span>
+                        <span class="caption">Connexion</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="navview-content mt-13-fs mt-0-sm">
+        <partial name="_MessageFlash"></partial>
+        @if(@ViewData["BackgroundTopImage"] == null) {
+            <div class="pl-4-md pr-4-md pt-1-fs pt-0-sm">
+                <div class="container-fluid">
+                    @RenderBody()
+                    <br/>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div style="width:100%; height: 300px; background-size: cover; background-image: url('@ViewData["BackgroundTopImage"]')"></div>
+            <div class="pl-4-md pr-4-md" style="top:-100px; margin-bottom: -100px">
+                <div class="container-fluid">
+                    <div data-role="panel" data-cls-panel="shadow-1">
+                        <div class="container-fluid">
+                            @RenderBody()
+                            <br/>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

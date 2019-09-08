@@ -1,0 +1,57 @@
+@inject IViewLocalizer ViewLocalizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@model JoinAGameTable.ViewModels.Event.ListMyEventsViewModel
+
+@{
+    ViewBag.Title = "Mes évènements";
+    Layout = "_Layout";
+    ViewData["CurrentMenuActive"] = "events";
+}
+
+<h1>Mes évènements</h1>
+<p>
+    Vous trouverez ici tous les évènements que vous avez créés sur la plateforme. Vous pouvez cliquer sur le nom
+    de celui que vous souhaitez configurer ou obtenir plus d'informations.
+</p>
+<br/>
+<br/>
+<div class="clear-float">
+    <div class="place-right">
+        <a asp-area="" asp-controller="Event" asp-action="GET_CreateNewEvent" class="button primary">
+            Proposer un évènement
+        </a>
+    </div>
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>@ViewLocalizer.GetString("event.list-my-event.name")</th>
+        <th>@ViewLocalizer.GetString("event.list-my-event.is-public")</th>
+        <th>@ViewLocalizer.GetString("event.list-my-event.begins-at")</th>
+        <th>@ViewLocalizer.GetString("event.list-my-event.ends-at")</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach(var evt in Model.Events)
+    {
+        <tr>
+            <td>
+                <a asp-area="" asp-controller="Event" asp-action="GET_ShowEventDashboard" asp-route-eventId="@evt.Id" class="no-decor">
+                    @evt.Name
+                </a>
+            </td>
+            <td>
+                @(evt.IsPublic
+                    ? ViewLocalizer.GetString("event.list-my-event.public-yes")
+                    : ViewLocalizer.GetString("event.list-my-event.public-no"))
+            </td>
+            <td>
+                @evt.BeginsAt
+            </td>
+            <td>
+                @evt.EndsAt
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

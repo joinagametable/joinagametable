@@ -1,0 +1,12 @@
+@{
+    var flashMessage = Context.MessageFlash();
+    if (flashMessage != null)
+    {
+        <div class="info-box pos-relative d-block z-1 @flashMessage.Severity" id="infobox-@flashMessage.Severity">
+            <span class="button square closer" onclick="closeMessageFlash('infobox-@flashMessage.Severity');"></span>
+            <div class="info-box-content">
+                 @Html.Raw(flashMessage.Message)
+            </div>
+        </div>
+    }
+}

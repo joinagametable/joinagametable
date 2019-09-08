@@ -1,0 +1,93 @@
+@model JoinAGameTable.ViewModels.Event.ShowEventInformationViewModel
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "_Layout";
+    ViewData["CurrentMenuActive"] = "events";
+    ViewData["CurrentSubMenuActive"] = "information";
+}
+
+<h1>@Model.Name</h1>
+<partial name="_SubMenu"></partial>
+<br/>
+<form asp-action="POST_UpdateEventInformation" enctype="multipart/form-data" method="post">
+    <div asp-validation-summary="ModelOnly" class="fg-red"> </div>
+    <div class="form-group">
+        <label asp-for="Name">Quel est le nom de votre évènement ?</label>
+        <input type="text" data-role="input" asp-for="Name" maxlength="50">
+        <span asp-validation-for="Name" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Décrivez votre évènement</label>
+        <textarea asp-for="Description"></textarea>
+        <span asp-validation-for="Description" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BeginsAtDate">Quand commence t'il ?</label>
+        <input type="text" data-role="datepicker" data-distance="2" data-format="%Y-%m-%d" asp-for="BeginsAtDate">
+        <input type="text" data-role="timepicker" data-distance="2" data-seconds="false" asp-for="BeginsAtTime">
+        <span asp-validation-for="BeginsAtDate" class="fg-red"></span>
+        <span asp-validation-for="BeginsAtTime" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EndsAtDate">Quand se termine t'il ?</label>
+        <input type="text" data-role="datepicker" data-distance="2" data-format="%Y-%m-%d" asp-for="EndsAtDate">
+        <input type="text" data-role="timepicker" data-distance="2" data-seconds="false" asp-for="EndsAtTime">
+        <span asp-validation-for="EndsAtDate" class="fg-red"></span>
+        <span asp-validation-for="EndsAtTime" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IsPublicilyAvailable">L'évènement est il public ?</label>
+        <input type="checkbox" data-role="switch" asp-for="IsPublicilyAvailable">
+    </div>
+    <div class="form-group" id="PubliclyAvailableAt" style="@(!Model.IsPublicilyAvailable ? "display: none;" : "")">
+        <label asp-for="PubliclyAvailableAtDate">À partir de quand est il public ?</label>
+        <input type="text" id="PubliclyAvailableAtDate" data-role="datepicker" data-distance="2" data-format="%Y-%m-%d" asp-for="PubliclyAvailableAtDate">
+        <input type="text" id="PubliclyAvailableAtTime" data-role="timepicker" data-distance="2" data-seconds="false" asp-for="PubliclyAvailableAtTime">
+        <span asp-validation-for="PubliclyAvailableAtDate" class="fg-red"></span>
+        <span asp-validation-for="PubliclyAvailableAtTime" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Banner" class="control-label">Banner</label>
+        @if (Model.BannerUrl != null)
+        {
+            <div class="rounded mb-1" style="width:100%; height: 300px; background-size: cover; background-image: url('@Model.BannerUrl')"></div>
+        }
+        <input type="file" name="Banner" data-role="file" data-prepend="Banner">
+        <span asp-validation-for="Banner" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Cover" class="control-label">Cover</label>
+        @if (Model.CoverUrl != null)
+        {
+            <img class="align-self-start mb-1 img-fluid rounded" style="max-width: 300px; height: 182px;" alt="@Model.Name" src="@Model.CoverUrl"/>
+        }
+        <input type="file" name="Cover" data-role="file" data-prepend="Cover">
+        <span asp-validation-for="Cover" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <button class="button">Sauvegarder</button>
+    </div>
+    <br/>
+</form>
+
+<script>
+    new SimpleMDE({
+        element: document.getElementById("Description"),
+    	spellChecker: false,
+        promptURLs:true,
+    	status: false,
+    	insertTexts: {
+            table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"]
+    	},
+    	shortcuts: {
+            drawTable: "Cmd-Alt-T"
+        },
+        showIcons: ["code", "table"],
+    	hideIcons: ["side-by-side", "fullscreen", "image"]
+    });
+
+    $("#IsPublicilyAvailable").on("change" , function() {
+        $("#PubliclyAvailableAt").fadeToggle("fast");
+     });
+</script>

@@ -1,0 +1,137 @@
+msgid "error.required"
+msgstr "Le champ est requis."
+
+msgid "error.invalid"
+msgstr "Cette valeur n'est pas valide."
+
+msgid "error.length"
+msgstr "Le champ doit être une chaîne de caractères d'une longueur minimale de {2} et maximale de {1}."
+
+msgid "error.min-length"
+msgstr "Le champ doit être une chaîne de caractères d'une longueur minimale de {1}."
+
+msgid "error.email"
+msgstr "Le champ n’est pas une adresse e-mail valide."
+
+msgid "error.email-not-available"
+msgstr "Cette adresse e-mail est déjà utilisée."
+
+msgid "error.date-must-be-before"
+msgstr "La date doit être plus petite que {0}."
+
+msgid "error.date-must-be-after"
+msgstr "La date doit être plus grande que {0}."
+
+msgid "error.date-must-be-in-future"
+msgstr "La date doit être dans le future."
+
+msgid "topbar.menu.search-tooltip"
+msgstr "Rechercher"
+
+msgid "topbar.menu.search-button"
+msgstr "Rechercher"
+
+msgid "topbar.menu.authentication"
+msgstr "Connexion"
+
+msgid "topbar.menu.my-profile"
+msgstr "Mon profil"
+
+msgid "topbar.menu.site-admin"
+msgstr "Administration du site"
+
+msgid "topbar.menu.logout"
+msgstr "Déconnexion"
+
+msgid "session.login.title"
+msgstr "Connexion"
+
+msgid "session.login.email"
+msgstr "Adresse e-mail"
+
+msgid "session.login.password"
+msgstr "Mot de passe"
+
+msgid "session.login.login"
+msgstr "Connexion"
+
+msgid "session.login.signup"
+msgstr "Créer un compte"
+
+msgid "session.signup.title"
+msgstr "Création de compte"
+
+msgid "session.signup.first-name"
+msgstr "Prénom"
+
+msgid "session.signup.last-name"
+msgstr "Nom de famille"
+
+msgid "session.signup.email"
+msgstr "Adresse e-mail"
+
+msgid "session.signup.password"
+msgstr "Mot de passe"
+
+msgid "session.signup.signup"
+msgstr "Création"
+
+msgid "user-account.profile.title"
+msgstr "Mon profil"
+
+msgid "user-account.profile.first-name"
+msgstr "Prénom"
+
+msgid "user-account.profile.last-name"
+msgstr "Nom de famille"
+
+msgid "user-account.profile.display-name"
+msgstr "Apparaître en tant que"
+
+msgid "user-account.profile.help-display-name"
+msgstr "Cette information sera affichée sur le site. Si vous ne voulez pas que votre nom complet apparaisse, utilisez un pseudonyme."
+
+msgid "user-account.profile.email"
+msgstr "Adresse e-mail"
+
+msgid "user-account.profile.language"
+msgstr "Langue"
+
+msgid "user-account.profile.update-button"
+msgstr "Mettre à jour"
+
+msgid "user-account.profile.flash-success"
+msgstr "Profil mis à jour avec succès"
+
+msgid "event.list-my-event.name"
+msgstr "Nom"
+
+msgid "event.list-my-event.is-public"
+msgstr "Public ?"
+
+msgid "event.list-my-event.begins-at"
+msgstr "Début"
+
+msgid "event.list-my-event.ends-at"
+msgstr "Fin"
+
+msgid "event.list-my-event.public-yes"
+msgstr "Oui"
+
+msgid "event.list-my-event.public-no"
+msgstr "Non"
+
+msgid "event.create.flash-success"
+msgstr "Évènement créé avec succès"
+
+msgid "event.update.flash-success"
+msgstr "Les informations de l'évènement ont été mises à jour"
+
+msgid "enum.ROLE_PLAYING_GAME"
+msgstr "Jeux de Rôle"
+
+msgid "enum.BOARD_GAME"
+msgstr "Jeux de Plateau"
+
+msgid "enum.CARD_GAME"
+msgstr "Jeux de Cartes"

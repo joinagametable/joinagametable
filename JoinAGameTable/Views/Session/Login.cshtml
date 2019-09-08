@@ -1,0 +1,28 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+@model JoinAGameTable.ViewModels.AuthenticationViewModel
+@{
+    ViewData["Title"] = ViewLocalizer.GetString("session.login.title");
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="POST_AuthenticateUser" method="post">
+    <div asp-validation-summary="ModelOnly" class="fg-red"> </div>
+    <div class="form-group">
+        <label asp-for="Email">@ViewLocalizer.GetString("session.login.email")</label>
+        <input type="text" data-role="input" asp-for="Email">
+        <span asp-validation-for="Email" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">@ViewLocalizer.GetString("session.login.password")</label>
+        <input type="password" data-role="input" asp-for="Password">
+        <span asp-validation-for="Password" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="ReturnUrl" type="hidden" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="@ViewLocalizer.GetString("session.login.login")" class="button"/>
+        <a class="no-decor" asp-area="" asp-controller="Session" asp-action="GET_ShowSignUpForm">@ViewLocalizer.GetString("session.login.signup")</a>
+    </div>
+</form>

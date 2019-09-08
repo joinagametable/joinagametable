@@ -1,0 +1,12 @@
+@model JoinAGameTable.ViewModels.Event.ShowEventDashboardViewModel
+
+@{
+    ViewBag.Title = Model.EventName;
+    Layout = "_Layout";
+    ViewData["CurrentMenuActive"] = "events";
+    ViewData["CurrentSubMenuActive"] = "insights";
+}
+
+<h1>@Model.EventName</h1>
+<partial name="_SubMenu"></partial>
+<br/>
