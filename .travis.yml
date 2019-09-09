@@ -2,16 +2,16 @@ language:
   csharp
 
 dist:
-  xenial 
+  xenial
 
 mono:
   none
 
-dotnet: 
+dotnet:
   2.2
 
 solution:
-  WebApplication1.sln
+  JoinAGameTable.sln
 
 script:
   - dotnet restore
