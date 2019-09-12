@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using JoinAGameTable.Extensions;
 using JoinAGameTable.Models;
 using JoinAGameTable.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -27,10 +29,43 @@ namespace JoinAGameTable
         /// <summary>
         /// Build a new instance.
         /// </summary>
-        /// <param name="configuration">Handle to the current configuration</param>
-        public Startup(IConfiguration configuration)
+        /// <param name="hostingEnvironment">The current running environment</param>
+        public Startup(IHostingEnvironment hostingEnvironment)
         {
-            Configuration = configuration;
+            // Initialize configuration builder
+            var configurationBuilder = new ConfigurationBuilder().SetBasePath(hostingEnvironment.ContentRootPath);
+
+            // Use local configuration files
+            configurationBuilder = configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            configurationBuilder = configurationBuilder.AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", optional: true);
+
+            // Use etcd configuration if needed
+            var envEnabled = Environment.GetEnvironmentVariable("JAGT_ETCD_CFG_ENABLE");
+            if (!string.IsNullOrEmpty(envEnabled))
+            {
+                // Retrieves configuration from environment variables
+                var envUrls = Environment.GetEnvironmentVariable("JAGT_ETCD_CFG_URLS")?.Split(",");
+                var envUsername = Environment.GetEnvironmentVariable("JAGT_ETCD_CFG_USERNAME");
+                var endPassword = Environment.GetEnvironmentVariable("JAGT_ETCD_CFG_PASSWORD");
+                var endRootPath = Environment.GetEnvironmentVariable("JAGT_ETCD_CFG_ROOTPATH");
+                var endIgnoreCertificateError = bool.Parse(Environment.GetEnvironmentVariable("JAGT_ETCD_CFG_IGNORE_CERT_ERROR") ?? "false");
+
+                // Add etcd configuration
+                configurationBuilder = configurationBuilder.AddEtcdConfiguration(new EtcdConfigurationOptions
+                {
+                    Urls = envUrls ?? new[] {"http://127.0.0.1:4001"},
+                    Username = envUsername,
+                    Password = endPassword,
+                    RootPath = endRootPath ?? "/",
+                    IgnoreCertificateError = endIgnoreCertificateError
+                });
+            }
+
+            // Use environment variables
+            configurationBuilder = configurationBuilder.AddEnvironmentVariables("JAGT");
+
+            // Build configuration
+            Configuration = configurationBuilder.Build();
         }
 
         /// <summary>
@@ -113,17 +148,17 @@ namespace JoinAGameTable
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
-        /// <param name="app">The application builder</param>
-        /// <param name="env">The current running environment</param>
-        public void Configure(IApplicationBuilder app,
-                              IHostingEnvironment env)
+        /// <param name="applicationBuilder">The application builder</param>
+        /// <param name="hostingEnvironment">The current running environment</param>
+        public void Configure(IApplicationBuilder applicationBuilder,
+                              IHostingEnvironment hostingEnvironment)
         {
-            if (env.IsDevelopment())
+            if (hostingEnvironment.IsDevelopment())
             {
                 // When the app runs in the Development environment:
                 //   Use the Developer Exception Page to report app runtime errors
                 //   Use the Database Error Page to report database runtime errors
-                app.UseDeveloperExceptionPage();
+                applicationBuilder.UseDeveloperExceptionPage();
             }
             else
             {
@@ -132,9 +167,9 @@ namespace JoinAGameTable
                 //     thrown in the following middlewares
                 //   Use the HTTP Strict Transport Security Protocol (HSTS)
                 //     Middleware
-                app.UseExceptionHandler("/error");
-                app.UseStatusCodePagesWithReExecute("/error", "?httpErrorCode={0}");
-                app.UseHsts();
+                applicationBuilder.UseExceptionHandler("/error");
+                applicationBuilder.UseStatusCodePagesWithReExecute("/error", "?httpErrorCode={0}");
+                applicationBuilder.UseHsts();
             }
 
             // UseRequestLocalization initializes a RequestLocalizationOptions object. On every request the list
@@ -145,23 +180,23 @@ namespace JoinAGameTable
             //   2. CookieRequestCultureProvider
             //   3. AcceptLanguageHeaderRequestCultureProvider
             // If none of the providers can determine the request culture, the DefaultRequestCulture is used
-            var reqLocalizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(reqLocalizationOptions.Value);
+            var reqLocalizationOptions = applicationBuilder.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            applicationBuilder.UseRequestLocalization(reqLocalizationOptions.Value);
 
             // Return static files and end the pipeline.
-            app.UseStaticFiles();
+            applicationBuilder.UseStaticFiles();
 
             // When a front-end like Nginx or Traefik is used
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            applicationBuilder.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
             // Enable authentication
-            app.UseAuthentication();
+            applicationBuilder.UseAuthentication();
 
             // Add MVC to the request pipeline
-            app.UseMvc(routes =>
+            applicationBuilder.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",

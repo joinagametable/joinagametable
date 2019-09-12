@@ -13,6 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="EtcdNetCore" Version="1.0.0" />
         <PackageReference Include="MailKit" Version="2.2.0" />
         <PackageReference Include="Markdig" Version="0.17.1" />
         <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
