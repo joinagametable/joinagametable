@@ -17,7 +17,7 @@ namespace JoinAGameTable.Models
         /// Name of the event.
         /// </summary>
         [Required,
-         StringLength(50)]
+         StringLength(35)]
         public string Name { get; set; }
 
         /// <summary>

@@ -18,7 +18,7 @@
     <div asp-validation-summary="ModelOnly" class="fg-red"> </div>
     <div class="form-group">
         <label asp-for="Name">@ViewLocalizer.GetString("event.create-or-update.which-name")</label>
-        <input type="text" data-role="input" asp-for="Name" maxlength="50">
+        <input type="text" data-role="input" asp-for="Name" maxlength="35">
         <span asp-validation-for="Name" class="fg-red"></span>
     </div>
     <div class="form-group">
@@ -41,7 +41,7 @@
         <span asp-validation-for="EndsAtTime" class="fg-red"></span>
     </div>
     <div class="form-group">
-        <button class="button success">@ViewLocalizer.GetString("event.create-or-update.button-create")</button>
+        <button class="button">@ViewLocalizer.GetString("event.create-or-update.button-create")</button>
     </div>
     <br/>
 </form>

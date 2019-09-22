@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using JoinAGameTable.Enumerations;
 
-namespace JoinAGameTable.ViewModels.Event
+namespace JoinAGameTable.ViewModels.GameTable
 {
     public class ShowEventGameTablesViewModel
     {
@@ -32,6 +31,11 @@ namespace JoinAGameTable.ViewModels.Event
         public class GameTable
         {
             /// <summary>
+            /// Game table unique Id.
+            /// </summary>
+            public Guid Id { get; set; }
+
+            /// <summary>
             /// Game table name.
             /// </summary>
             public string Name { get; set; }
@@ -39,7 +43,7 @@ namespace JoinAGameTable.ViewModels.Event
             /// <summary>
             /// Game table type.
             /// </summary>
-            public GameTypeEnum Type { get; set; }
+            public string Type { get; set; }
 
             /// <summary>
             /// Current number of booked seat.

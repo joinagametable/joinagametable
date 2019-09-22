@@ -2,14 +2,12 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using JoinAGameTable.Enumerations;
 using JoinAGameTable.Extensions;
 using JoinAGameTable.Models;
 using JoinAGameTable.Services;
 using JoinAGameTable.ViewModels.Event;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using SixLabors.ImageSharp;
@@ -41,27 +39,19 @@ namespace JoinAGameTable.Controllers
         private readonly IStringLocalizer<EventController> _localizer;
 
         /// <summary>
-        /// Handle to the Markdown service.
-        /// </summary>
-        private readonly IMarkdownService _markdownService;
-
-        /// <summary>
         /// Build a new instance.
         /// </summary>
         /// <param name="appDbContext">Handle to the application database context</param>
         /// <param name="fileStorageService">Handle to the file storage service</param>
-        /// <param name="markdownService">Handle to the Markdown service</param>
         /// <param name="localizer">Handle to the localizer</param>
         public EventController(AppDbContext appDbContext,
                                IImageManipulationService imageManipulationService,
                                IFileStorageService fileStorageService,
-                               IMarkdownService markdownService,
                                IStringLocalizer<EventController> localizer)
         {
             _appDbContext = appDbContext;
             _fileStorageService = fileStorageService;
             _imageManipulationService = imageManipulationService;
-            _markdownService = markdownService;
             _localizer = localizer;
         }
 
@@ -273,6 +263,7 @@ namespace JoinAGameTable.Controllers
                     ModelState.AddModelError("BeginsAtDate", _localizer["error.date-must-be-in-future"]);
                 }
             }
+
             if (model.EndsAt != evt.EndsAt)
             {
                 if (model.BeginsAt >= model.EndsAt)
@@ -422,93 +413,6 @@ namespace JoinAGameTable.Controllers
 
             // Render
             return RedirectToAction("GET_ShowEventInformation", new {eventId = eventId});
-        }
-
-        /// <summary>
-        /// Show selected event: Game Tables.
-        /// </summary>
-        /// <param name="eventId">Event unique Id</param>
-        /// <returns>An html document</returns>
-        [HttpGet("/event/{eventId:guid}/gametable")]
-        public async Task<IActionResult> GET_ShowEventGameTables(Guid eventId)
-        {
-            // Retrieve event
-            var evt = await _appDbContext.Event
-                .Select(record => new
-                {
-                    record.Id,
-                    record.Name,
-                    record.Owner
-                })
-                .Where(record => record.Id.Equals(eventId) && record.Owner.Id.Equals(User.GetUniqueId()))
-                .Take(1)
-                .FirstAsync();
-            if (evt == null)
-            {
-                return NotFound();
-            }
-
-            // Retrieve game tables
-            var gameTables = await _appDbContext.GameTable
-                .Where(record => record.Event.Id.Equals(eventId))
-                .ToListAsync();
-
-            // Create model
-            var model = new ShowEventGameTablesViewModel
-            {
-                EventId = evt.Id,
-                EventName = evt.Name,
-            };
-            foreach (var gameTable in gameTables)
-            {
-                model.GameTables.Add(new ShowEventGameTablesViewModel.GameTable
-                {
-                    Name = gameTable.Name,
-                    Type = gameTable.GameType,
-                    CurrentSeat = 0,
-                    NumberOfSeat = gameTable.NumberOfSeat
-                });
-            }
-
-            // Render
-            return View("ShowEventGameTables", model);
-        }
-
-        /// <summary>
-        /// Show the game table creation page.
-        /// </summary>
-        /// <param name="eventId">Event unique Id</param>
-        /// <returns>An html document</returns>
-        [HttpGet("/event/{eventId:guid}/gametable/create")]
-        public async Task<IActionResult> GET_CreateNewGameTable(Guid eventId)
-        {
-            // Retrieve event
-            var evt = await _appDbContext.Event
-                .Where(record => record.Id.Equals(eventId) && record.Owner.Id.Equals(User.GetUniqueId()))
-                .Take(1)
-                .FirstAsync();
-            if (evt == null)
-            {
-                return NotFound();
-            }
-
-            // Create model
-            var model = new CreateNewGameTableViewModel()
-            {
-                EventId = evt.Id,
-                EventName = evt.Name,
-                TypeAvailables = Enum.GetValues(typeof(GameTypeEnum))
-                    .Cast<GameTypeEnum>()
-                    .Select(value => new SelectListItem
-                    {
-                        Value = value.ToString(),
-                        Text = _localizer.GetString("enum." + value)
-                    })
-                    .ToList()
-            };
-
-            // Render
-            return View("CreateNewGameTable", model);
         }
 
         /// <summary>

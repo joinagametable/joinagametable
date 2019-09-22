@@ -65,7 +65,7 @@ namespace JoinAGameTable.Models
         /// <summary>
         /// Game table meta data.
         /// </summary>
-        public virtual IEnumerable<GameTableMetaDataModel> MetaData { get; set; }
+        public virtual ICollection<GameTableMetaDataModel> MetaData { get; set; }
 
         /// <summary>
         /// Event linked to the game table.

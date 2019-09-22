@@ -1,0 +1,126 @@
+@using JoinAGameTable.Enumerations
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+@model JoinAGameTable.ViewModels.GameTable.CreateUpdateGameTableViewModel
+
+@{
+    ViewBag.Title = Model.EventName;
+    Layout = "_Layout";
+    ViewData["CurrentMenuActive"] = "events";
+    ViewData["CurrentSubMenuActive"] = "gametables";
+}
+
+<h1>@Model.EventName</h1>
+<partial name="../Event/_SubMenu"></partial>
+<h3>Ajouter une table de jeu</h3>
+<form asp-action="POST_UpdateGameTable" asp-route-eventId="@Model.EventId" method="post">
+    <div asp-validation-summary="ModelOnly" class="fg-red"> </div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">@ViewLocalizer.GetString("event.manage.gametables.create.name") </label>
+        <input type="text" data-role="input" asp-for="Name" maxlength="35">
+        <span asp-validation-for="Name" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Type" class="control-label">@ViewLocalizer.GetString("event.manage.gametables.create.which-type") </label>
+        <select class="form-control" asp-for="Type" asp-items="@Model.TypeAvailables">
+        </select>
+        <span asp-validation-for="Type" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BeginsAtDate">@ViewLocalizer.GetString("event.manage.gametables.create.begins-at")</label>
+        <input type="text" data-role="datepicker" data-distance="2" data-format="%Y-%m-%d" asp-for="BeginsAtDate">
+        <input type="text" data-role="timepicker" data-distance="2" data-seconds="false" asp-for="BeginsAtTime">
+        <span asp-validation-for="BeginsAtDate" class="fg-red"></span>
+        <span asp-validation-for="BeginsAtTime" class="fg-red"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DurationEstimationLow">@ViewLocalizer.GetString("event.manage.gametables.create.duration")</label>
+        <div class="row">
+            <div class="cell">
+                <div>
+                    <input type="number" min="2" max="1440" asp-for="DurationEstimationLow" data-role="input" data-append="minutes">
+                    <span asp-validation-for="DurationEstimationLow" class="fg-red"></span>
+                </div>
+            </div>
+            <div class="cell-1-12">
+                <div>à</div>
+            </div>
+            <div class="cell">
+                <div>
+                    <input type="number" min="2" max="1440" asp-for="DurationEstimationHigh" data-role="input" data-append="minutes">
+                    <span asp-validation-for="DurationEstimationHigh" class="fg-red"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" id="metadata" data-index="@Model.MetaData.Count">
+        <label asp-for="BeginsAtDate">@ViewLocalizer.GetString("event.manage.gametables.create.metadata")</label>
+        <table class="table">
+            @for (var i = 0; i < Model.MetaData.Count; i++)
+            {
+                <tr class="metadata-entry" id="metadata-item-@i">
+                    <td style="width:2px" class="va-top pt-3">
+                        <button class="button alert square small rounded" onclick="return GameTableMetaDataEditor.removeEntry(@i)">
+                            <span class="mif-cross"></span>
+                        </button>
+                    </td>
+                    <td style="width:200px" class="va-top">
+                        @Html.DropDownListFor(m => Model.MetaData[i].Key, Model.GameTableMetaDataKeyEnumAvailables)
+                        <span asp-validation-for="@Model.MetaData[i].Key" class="fg-red"></span>
+                    </td>
+                    <td class="va-top">
+                        @switch (Model.MetaData[i].Key)
+                        {
+                            case GameTableMetaDataKeyEnum.SYNOPSIS:
+                            case GameTableMetaDataKeyEnum.GAME_MASTER_WORD:
+                            case GameTableMetaDataKeyEnum.GAME_FACILITATOR_WORD:
+                                @Html.TextAreaFor(m => Model.MetaData[i].Value)
+                                break;
+                            default:
+                                @Html.TextBoxFor(m => Model.MetaData[i].Value)
+                                break;
+                        }
+                        <span asp-validation-for="@Model.MetaData[i].Value" class="fg-red"></span>
+                    </td>
+                </tr>
+            }
+            <tr id="metadata-add-item">
+                <td style="width:2px">
+                    <button class="button success square small rounded" onclick="return GameTableMetaDataEditor.addNewEntry();">
+                        <span class="mif-plus"></span>
+                    </button>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <template id="metadata-template">
+                <tr class="metadata-entry" id="metadata-item-{{idx}}">
+                    <td style="width:2px" class="va-top pt-3">
+                        <button class="button alert square small rounded" onclick="return GameTableMetaDataEditor.removeEntry('{{idx}}')">
+                            <span class="mif-cross"></span>
+                        </button>
+                    </td>
+                    <td style="width:200px" class="va-top">
+                        <select id="MetaData_{{idx}}__Key" name="MetaData[{{idx}}].Key">
+                            @foreach (var metaKey in Model.GameTableMetaDataKeyEnumAvailables)
+                            {
+                                <option value="@metaKey.Value">@metaKey.Text</option>
+                            }
+                        </select>
+                    </td>
+                    <td class="va-top">
+                        <input id="MetaData_{{idx}}__Value" name="MetaData[{{idx}}].Value" type="text" data-val="true" value="">
+                    </td>
+                </tr>
+            </template>
+        </table>
+    </div>
+    <div class="form-group">
+        <button class="button">@ViewLocalizer.GetString("event.manage.gametables.create.button-create")</button>
+    </div>
+    <br/>
+</form>
+
+@section Script{
+    GameTableMetaDataEditor.initialize();
+}

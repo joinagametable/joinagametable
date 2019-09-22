@@ -1,0 +1,66 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+@model JoinAGameTable.ViewModels.GameTable.ShowEventGameTablesViewModel
+
+@{
+    ViewBag.Title = Model.EventName;
+    Layout = "_Layout";
+    ViewData["CurrentMenuActive"] = "events";
+    ViewData["CurrentSubMenuActive"] = "gametables";
+}
+
+<h1>@Model.EventName</h1>
+<partial name="../Event/_SubMenu"></partial>
+<div class="clear-float">
+    <div class="place-right">
+        <a asp-area="" asp-controller="GameTable" asp-action="GET_CreateNewGameTable" asp-route-eventId="@Model.EventId" class="button primary">
+            @ViewLocalizer.GetString("event.manage.gametables.button-create")
+        </a>
+    </div>
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>@ViewLocalizer.GetString("event.manage.gametables.name")</th>
+        <th>@ViewLocalizer.GetString("event.manage.gametables.type")</th>
+        <th>@ViewLocalizer.GetString("event.manage.gametables.seats")</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var gameTable in Model.GameTables)
+    {
+        <tr>
+            <td>
+                <a asp-controller="GameTable" asp-action="GET_UpdateGameTable" asp-route-eventId="@Model.EventId" asp-route-gameTableId="@gameTable.Id" class="no-decor">
+                    @gameTable.Name
+                </a>
+            </td>
+            <td>@gameTable.Type</td>
+            <td>@gameTable.CurrentSeat / @gameTable.NumberOfSeat</td>
+            <td class="text-right">
+
+
+                <div class="dialog" data-role="dialog" id="confirmdelete-@gameTable.Id">
+                    <div class="dialog-title">Confirmer la suppression ?</div>
+                    <div class="dialog-content">
+                        Vous êtes sur le point de supprimer la table de jeux <code>@gameTable.Name</code>. Toutes les données relatives à cette tables seront définitivement supprimées.
+                        <br>
+                        <br>
+                        Confirmez-vous l'opération ?
+                    </div>
+                    <div class="dialog-actions">
+                        <div class="clear">
+                            <button class="button place-left js-dialog-close">Annuler</button>
+                            <form asp-action="POST_DeleteGameTable" asp-route-eventId="@Model.EventId" asp-route-gameTableId="@gameTable.Id" method="post" class="place-right">
+                                <button type="submit" class="button alert right">Supprimer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <button class="button alert small" onclick="Metro.dialog.open('#confirmdelete-@gameTable.Id')">Delete</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -4,6 +4,15 @@ msgstr "Le champ est requis."
 msgid "error.invalid"
 msgstr "Cette valeur n'est pas valide."
 
+msgid "error.range"
+msgstr "La valeur doit être comprise entre {1} et {2}."
+
+msgid "error.min"
+msgstr "La valeur doit être égale ou plus grande que {1}."
+
+msgid "error.max"
+msgstr "La valeur doit être égale ou plus petite que {1}."
+
 msgid "error.length"
 msgstr "Le champ doit être une chaîne de caractères d'une longueur minimale de {2} et maximale de {1}."
 
@@ -24,6 +33,9 @@ msgstr "La date doit être plus grande que {0}."
 
 msgid "error.date-must-be-in-future"
 msgstr "La date doit être dans le future."
+
+msgid "error.already-in-use"
+msgstr "Cette valeur est déjà utilisée"
 
 msgid "topbar.menu.search-tooltip"
 msgstr "Rechercher"
@@ -158,14 +170,44 @@ msgstr "Type"
 msgid "event.manage.gametables.seats"
 msgstr "Places"
 
+msgid "event.manage.gametables.create.name"
+msgstr "Quel est le nom de la table ?"
+
 msgid "event.manage.gametables.create.which-type"
 msgstr "Quel est le type de jeu joué sur cette table ?"
+
+msgid "event.manage.gametables.create.number-seat"
+msgstr "Combient de place disponible ?"
+
+msgid "event.manage.gametables.create.begins-at"
+msgstr "Quand la partie commence t'elle ?"
+
+msgid "event.manage.gametables.create.duration"
+msgstr "Durée estimée de la partie"
+
+msgid "event.manage.gametables.create.metadata"
+msgstr "Informations supplémentaires"
+
+msgid "event.manage.gametables.create.button-create"
+msgstr "Créer la table"
+
+msgid "event.manage.gametables.update.button-update"
+msgstr "Mettre à jour"
 
 msgid "event.create.flash-success"
 msgstr "Évènement créé avec succès."
 
 msgid "event.update.flash-success"
-msgstr "Les informations de l'évènement ont été mises à jour."
+msgstr "Évènement mis à jour."
+
+msgid "gametable.create.flash-success"
+msgstr "Table de jeux créé avec succès."
+
+msgid "gametable.update.flash-success"
+msgstr "Les informations de la table de jeux ont été mises à jour."
+
+msgid "gametable.delete.flash-success"
+msgstr "La table de jeux \"{0}\" a été supprimée avec succès."
 
 msgid "home.upcoming-events"
 msgstr "Évènements à l'affiche"
@@ -243,11 +285,44 @@ msgstr "Déconnexion"
 msgid "mainmenu.login"
 msgstr "Connexion"
 
-msgid "enum.ROLE_PLAYING_GAME"
+msgid "enum.GameTypeEnum.ROLE_PLAYING_GAME"
 msgstr "Jeux de Rôle"
 
-msgid "enum.BOARD_GAME"
+msgid "enum.GameTypeEnum.BOARD_GAME"
 msgstr "Jeux de Plateau"
 
-msgid "enum.CARD_GAME"
+msgid "enum.GameTypeEnum.CARD_GAME"
 msgstr "Jeux de Cartes"
+
+msgid "enum.GameTableMetaDataKeyEnum.UNIVERSE"
+msgstr "Univers"
+
+msgid "enum.GameTableMetaDataKeyEnum.THEMES"
+msgstr "Thème(s)"
+
+msgid "enum.GameTableMetaDataKeyEnum.SYNOPSIS"
+msgstr "Synopsis"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_FACILITATOR"
+msgstr "Hôte"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_FACILITATOR_WORD"
+msgstr "Mot de l'hôte"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_MASTER"
+msgstr "Maître du Jeu"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_MASTER_WORD"
+msgstr "Mot du MJ"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_STYLE"
+msgstr "Style"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_SYSTEM"
+msgstr "Système"
+
+msgid "enum.GameTableMetaDataKeyEnum.RULES"
+msgstr "Règles"
+
+msgid "enum.GameTableMetaDataKeyEnum.TIME_PERIOD"
+msgstr "Période"

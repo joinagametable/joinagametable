@@ -4,6 +4,15 @@ msgstr "This field is required."
 msgid "error.invalid"
 msgstr "This value is not valid."
 
+msgid "error.range"
+msgstr "This value must be in range {1}..{2}."
+
+msgid "error.min"
+msgstr "This value must be equal or higher than {1}."
+
+msgid "error.max"
+msgstr "This value must be equal or lower than {1}."
+
 msgid "error.length"
 msgstr "The field must be a string with a minimum length of {2} and a maximum length of {1}."
 
@@ -24,6 +33,9 @@ msgstr "Date must be after {0}."
 
 msgid "error.date-must-be-in-future"
 msgstr "Date must be in the future."
+
+msgid "error.already-in-use"
+msgstr "This value is already in use"
 
 msgid "topbar.menu.search-tooltip"
 msgstr "Search"
@@ -158,14 +170,44 @@ msgstr "Type"
 msgid "event.manage.gametables.seats"
 msgstr "Seats"
 
+msgid "event.manage.gametables.create.name"
+msgstr "What is the name of the table?"
+
 msgid "event.manage.gametables.create.which-type"
 msgstr "What type of game is played on this table?"
+
+msgid "event.manage.gametables.create.number-seat"
+msgstr "How many seats are available?"
+
+msgid "event.manage.gametables.create.begins-at"
+msgstr "When does the game start?"
+
+msgid "event.manage.gametables.create.duration"
+msgstr "Estimated duration of the game"
+
+msgid "event.manage.gametables.create.metadata"
+msgstr "Extra information"
+
+msgid "event.manage.gametables.create.button-create"
+msgstr "Create"
+
+msgid "event.manage.gametables.update.button-update"
+msgstr "Update"
 
 msgid "event.create.flash-success"
 msgstr "Event created with success."
 
 msgid "event.update.flash-success"
 msgstr "Event information updated with success."
+
+msgid "gametable.create.flash-success"
+msgstr "Game table created with success."
+
+msgid "gametable.update.flash-success"
+msgstr "Game table information update with success."
+
+msgid "gametable.delete.flash-success"
+msgstr "Game table \"{0}\" deleted with success."
 
 msgid "home.upcoming-events"
 msgstr "Upcoming events"
@@ -243,11 +285,44 @@ msgstr "Logout"
 msgid "mainmenu.login"
 msgstr "Login"
 
-msgid "enum.ROLE_PLAYING_GAME"
+msgid "enum.GameTypeEnum.ROLE_PLAYING_GAME"
 msgstr "Role Playing Game"
 
-msgid "enum.BOARD_GAME"
+msgid "enum.GameTypeEnum.BOARD_GAME"
 msgstr "Board Game"
 
-msgid "enum.CARD_GAME"
+msgid "enum.GameTypeEnum.CARD_GAME"
 msgstr "Card Game"
+
+msgid "enum.GameTableMetaDataKeyEnum.UNIVERSE"
+msgstr "Universe"
+
+msgid "enum.GameTableMetaDataKeyEnum.THEMES"
+msgstr "Theme(s)"
+
+msgid "enum.GameTableMetaDataKeyEnum.SYNOPSIS"
+msgstr "Synopsis"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_FACILITATOR"
+msgstr "Game Facilitator"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_FACILITATOR_WORD"
+msgstr "Game Facilitator Word"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_MASTER"
+msgstr "Game Master"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_MASTER_WORD"
+msgstr "GM Word"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_STYLE"
+msgstr "Style"
+
+msgid "enum.GameTableMetaDataKeyEnum.GAME_SYSTEM"
+msgstr "System"
+
+msgid "enum.GameTableMetaDataKeyEnum.RULES"
+msgstr "Rules"
+
+msgid "enum.GameTableMetaDataKeyEnum.TIME_PERIOD"
+msgstr "Time period"
